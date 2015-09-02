@@ -21,8 +21,10 @@ public class TranslateAction extends AnAction {
 		if (data != null) {
 			String selectedText = data.getSelectionModel().getSelectedText();
 			if (selectedText != null && selectedText.length() > 0) {
+				String splittedText = splitCamelCase(selectedText);
+				splittedText = splitUnderscore(splittedText);
 				String[] langPairs = getLangPair(project);
-				String translated = new YandexClient().translate(selectedText, langPairs[0], langPairs[1]);
+				String translated = new YandexClient().translate(splittedText, langPairs[0], langPairs[1]);
 				TranslationResponse response = new Gson().fromJson(translated, TranslationResponse.class);
 				List<String> texts = response.getText();
 
@@ -30,6 +32,27 @@ public class TranslateAction extends AnAction {
 				resultDialog.setVisible(true);
 			}
 		}
+	}
+
+	private String splitUnderscore(String splittedText) {
+		String[] splitted = splittedText.split("_");
+		return arrayToString(splitted);
+	}
+
+	private String splitCamelCase(String selectedText) {
+		String[] splitted = selectedText.split("(?<=[a-z])(?=[A-Z])");
+		return arrayToString(splitted);
+	}
+
+	private String arrayToString(String[] splitted) {
+		if (splitted.length == 1) {
+			return splitted[0];
+		}
+		StringBuilder builder = new StringBuilder();
+		for (String word : splitted) {
+			builder.append(word).append(" ");
+		}
+		return builder.toString();
 	}
 
 	public static String[] getLangPair(Project project) {
