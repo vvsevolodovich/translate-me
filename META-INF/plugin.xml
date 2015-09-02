@@ -1,17 +1,21 @@
 <idea-plugin version="2">
-    <id>com.yourcompany.unique.plugin.id</id>
-    <name>Plugin display name here</name>
+    <id>com.lid.intellij.translateme</id>
+    <name>TranslateMe</name>
     <version>1.0</version>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="vladimir.vs.ivanov@gmail.com" url="https://github.com/vlivanov">vlivanov's GitHub</vendor>
 
     <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      This plugin eases working with code and comments written not in English.<br>
+      If you deal with code with variables and error messages in spanish, german<br> or whatever language just use Alt + Y
+      to get the needed translation.<br>
+      Plugins employs Yandex Translator.<br>
+      The language pair can be adjusted in settings.
+             <br><br>
+      The language detection is in plans.
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      This is the initial release.
     ]]>
     </change-notes>
 
