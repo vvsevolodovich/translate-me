@@ -4,8 +4,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.List;
 
 public class YandexClient {
@@ -22,7 +24,11 @@ public class YandexClient {
 		String uri = "https://" + HOST + PATH + method;
 		uri += "?key=" + APIKEY;
 		uri += "&lang=" + langFrom + "-" + langTo;
-		uri += "&text=" + text;
+		try {
+			uri += "&text=" +  URLEncoder.encode(text, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
 		return request(uri);
 	}
