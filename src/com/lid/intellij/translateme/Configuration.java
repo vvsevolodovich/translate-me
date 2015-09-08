@@ -31,6 +31,7 @@ public final class Configuration implements ProjectComponent, Configurable, Pers
 	private TranslationConfigurationForm form;
 	private String langFrom = "en";
 	private String langTo = "ru";
+	private boolean autoDetect = false;
 
 	public String getFrom() {
 		return langFrom;
@@ -38,6 +39,14 @@ public final class Configuration implements ProjectComponent, Configurable, Pers
 
 	public String getTo() {
 		return langTo;
+	}
+
+	public boolean isAutoDetect() {
+		return autoDetect;
+	}
+
+	public void setAutoDetect(boolean autoDetect) {
+		this.autoDetect = autoDetect;
 	}
 
 	public void setLangPair(final String from, final String to) {

@@ -33,6 +33,15 @@ public class YandexClient {
 		return request(uri);
 	}
 
+	public String detect(String text) {
+		final String method = "detect";
+		String uri = "https://" + HOST + PATH + method;
+		uri += "?key=" + APIKEY;
+		uri += "&text=" + text;
+
+		return request(uri);
+	}
+
 	public String getLanguages(String ui) {
 		final String method = "getLangs";
 		String uri = "https://" + HOST + PATH + method;

@@ -1,21 +1,20 @@
 <idea-plugin version="2">
     <id>com.lid.intellij.translateme</id>
     <name>TranslateMe</name>
-    <version>1.0</version>
+    <version>1.0.0.2</version>
     <vendor email="vladimir.vs.ivanov@gmail.com" url="https://github.com/vlivanov">vlivanov's GitHub</vendor>
 
     <description><![CDATA[
       This plugin eases working with code and comments written not in English.<br>
       If you deal with code with variables and error messages in spanish, german<br> or whatever language just use Alt + Y
       to get the needed translation.<br>
-      Plugins employs Yandex Translator.<br>
-      The language pair can be adjusted in settings.
-             <br><br>
-      The language detection is in plans.
+      Plugin employs Yandex Translator.<br>
+      The language pair can be adjusted in settings or you can choose auto-detection.
+      <br><br>
     ]]></description>
 
     <change-notes><![CDATA[
-      This is the initial release.
+      1.0.0.2 Support language auto-detection.
     ]]>
     </change-notes>
 
