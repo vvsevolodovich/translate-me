@@ -14,6 +14,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+      1.0.0.3 Support in-place translation.
       1.0.0.2 Support language auto-detection.
     ]]>
     </change-notes>
@@ -24,8 +25,8 @@
     <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
          on how to target different products -->
     <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
     -->
+    <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
@@ -37,6 +38,7 @@
 
     <project-components>
         <component>
+            <interface-class>com.lid.intellij.translateme.Configuration</interface-class>
             <implementation-class>com.lid.intellij.translateme.Configuration</implementation-class>
             <option value="true" name="workspace"/>
         </component>
@@ -44,11 +46,17 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="com.lid.intellij.translateme.TranslateAction" class="com.lid.intellij.translateme.TranslateAction"
+        <action id="com.lid.intellij.translateme.actions.TranslateAction" class="com.lid.intellij.translateme.actions.TranslateAction"
                 text="Translate action"
                 description="Click here to try translate a selected word with Yandex translator">
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt Y"/>
+        </action>
+        <action id="com.lid.intellij.translateme.actions.TranslateAndReplaceAction" class="com.lid.intellij.translateme.actions.TranslateAndReplaceAction"
+                text="Translate and Replace action"
+                description="Click here to replace a selected word with Yandex translatation">
+            <add-to-group group-id="EditMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt G"/>
         </action>
     </actions>
 
