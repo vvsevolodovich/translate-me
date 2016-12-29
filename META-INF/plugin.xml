@@ -1,12 +1,12 @@
 <idea-plugin version="2">
     <id>com.lid.intellij.translateme</id>
     <name>TranslateMe</name>
-    <version>1.0.0.2</version>
+    <version>1.0.0.4</version>
     <vendor email="vladimir.vs.ivanov@gmail.com" url="https://github.com/vlivanov">vlivanov's GitHub</vendor>
 
     <description><![CDATA[
-      This plugin eases working with code and comments written not in English.<br>
-      If you deal with code with variables and error messages in spanish, german<br> or whatever language just use Alt + Y
+      This plugin eases working with the code and comments written not in English.<br>
+      If you deal with the code with variables and error messages in spanish, german<br> or whatever language just use Alt + Y
       to get the needed translation.<br>
       Plugin employs Yandex Translator.<br>
       The language pair can be adjusted in settings or you can choose auto-detection.
@@ -14,8 +14,9 @@
     ]]></description>
 
     <change-notes><![CDATA[
-      1.0.0.3 Support in-place translation.
-      1.0.0.2 Support language auto-detection.
+            1.0.0.4 Restore settings<br>
+            1.0.0.3 Support in-place translation.<br>
+            1.0.0.2 Support language auto-detection.<br>
     ]]>
     </change-notes>
 
@@ -30,6 +31,10 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <applicationConfigurable instance="com.lid.intellij.translateme.configuration.ConfigurationComponent">
+
+        </applicationConfigurable>
+        <applicationService serviceImplementation="com.lid.intellij.translateme.configuration.ConfigurationState"/>
     </extensions>
 
     <application-components>
@@ -38,8 +43,8 @@
 
     <project-components>
         <component>
-            <interface-class>com.lid.intellij.translateme.Configuration</interface-class>
-            <implementation-class>com.lid.intellij.translateme.Configuration</implementation-class>
+            <interface-class>com.lid.intellij.translateme.configuration.ConfigurationComponent</interface-class>
+            <implementation-class>com.lid.intellij.translateme.configuration.ConfigurationComponent</implementation-class>
             <option value="true" name="workspace"/>
         </component>
     </project-components>

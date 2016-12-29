@@ -12,8 +12,9 @@ import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.BalloonBuilder;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.ui.awt.RelativePoint;
-import com.lid.intellij.translateme.Configuration;
+import com.lid.intellij.translateme.configuration.ConfigurationComponent;
 import com.lid.intellij.translateme.ResultDialog;
+import com.lid.intellij.translateme.configuration.ConfigurationState;
 
 import java.awt.*;
 import java.util.List;
@@ -32,10 +33,10 @@ public class TranslateAction extends EditorAction {
 	public static String[] getLangPair(Project project) {
 
 		if (project != null) {
-			Configuration configuration = project.getComponent(Configuration.class);
+			ConfigurationState state = ConfigurationState.getInstance();
 
-			String from = configuration.getFrom();
-			String to = configuration.getTo();
+			String from = state.getFrom();
+			String to = state.getTo();
 			return new String[]{from, to};
 		}
 
@@ -44,8 +45,8 @@ public class TranslateAction extends EditorAction {
 
 	public static boolean isAutoDetect(Project project) {
 		if (project != null) {
-			Configuration configuration = project.getComponent(Configuration.class);
-			return configuration.isAutoDetect();
+			ConfigurationState state = ConfigurationState.getInstance();
+			return state.isAutoDetect();
 		}
 
 		return false;

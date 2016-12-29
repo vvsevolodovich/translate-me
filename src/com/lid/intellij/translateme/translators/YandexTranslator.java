@@ -2,8 +2,6 @@ package com.lid.intellij.translateme.translators;
 
 
 import com.google.gson.Gson;
-import com.intellij.openapi.project.Project;
-import com.lid.intellij.translateme.Configuration;
 import com.lid.intellij.translateme.yandex.DetectLanguageResponse;
 import com.lid.intellij.translateme.yandex.TranslationResponse;
 import com.lid.intellij.translateme.yandex.YandexClient;

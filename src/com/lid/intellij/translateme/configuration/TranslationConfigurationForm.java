@@ -1,4 +1,4 @@
-package com.lid.intellij.translateme;
+package com.lid.intellij.translateme.configuration;
 
 import com.google.gson.Gson;
 import com.intellij.openapi.ui.ComboBox;
@@ -100,7 +100,7 @@ public class TranslationConfigurationForm {
 		return rootComponent;
 	}
 
-	public void save(Configuration data) {
+	public void save(ConfigurationState data) {
 		String selectedItemFrom = (String) comboBoxFrom.getSelectedItem();
 		String selectedItemTo = (String) comboBoxTo.getSelectedItem();
 
@@ -112,15 +112,18 @@ public class TranslationConfigurationForm {
 		data.setAutoDetect(autoDetect.getState());
 		return;
 	}
-	public boolean load(Configuration data) {
+
+	public boolean load(ConfigurationState data) {
 		comboBoxFrom.setSelectedItem(data.getFrom());
 		comboBoxTo.setSelectedItem(data.getTo());
 		autoDetect.setState(data.isAutoDetect());
 		return true;
 	}
 
-	public boolean isModified(Configuration data) {
-		return true;
+	public boolean isModified(ConfigurationState data) {
+		Object selectedItem = comboBoxFrom.getSelectedItem();
+
+		return selectedItem != null && !selectedItem.equals(data.getFrom());
 	}
 	/*public boolean isModified(TranslateConfiguration data) {
 		KeyValuePair selectedItem = (KeyValuePair) comboBox.getSelectedItem();

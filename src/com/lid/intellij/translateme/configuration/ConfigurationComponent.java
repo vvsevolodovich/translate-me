@@ -1,23 +1,20 @@
-package com.lid.intellij.translateme;
+package com.lid.intellij.translateme.configuration;
 
-import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 @State(
-		name = Configuration.COMPONENT_NAME,
+		name = ConfigurationComponent.COMPONENT_NAME,
 		storages = {@Storage(id = "translate", file = "$PROJECT_FILE$")}
 )
-public final class Configuration implements ProjectComponent, Configurable, PersistentStateComponent<Configuration> {
-	public static final String COMPONENT_NAME = "Translate.Configuration";
+public final class ConfigurationComponent implements ProjectComponent, Configurable {
+	public static final String COMPONENT_NAME = "Translate.ConfigurationComponent";
 //  private final ImageIcon CONFIG_ICON =
 //          helper.getIcon("resources/icon.png", getClass());
 
@@ -30,40 +27,20 @@ public final class Configuration implements ProjectComponent, Configurable, Pers
 	}
 
 	private TranslationConfigurationForm form;
-	private String langFrom = "en";
-	private String langTo = "ru";
-	private boolean autoDetect = false;
 
-	public String getFrom() {
-		return langFrom;
-	}
-
-	public String getTo() {
-		return langTo;
-	}
-
-	public boolean isAutoDetect() {
-		return autoDetect;
-	}
-
-	public void setAutoDetect(boolean autoDetect) {
-		this.autoDetect = autoDetect;
-	}
-
-	public void setLangPair(final String from, final String to) {
-		langFrom = from;
-		langTo = to;
-	}
-
+	@Override
 	public boolean isModified() {
-		return form != null && form.isModified(this);
+		return form != null && form.isModified(ConfigurationState.getInstance());
 	}
 
+	@Override
 	public void projectOpened() {
-
+		System.out.println("ConfigurationComponent.projectOpened");
 	}
 
+	@Override
 	public void projectClosed() {
+		System.out.println("ConfigurationComponent.projectClosed");
 	}
 
 	@NotNull
@@ -71,12 +48,15 @@ public final class Configuration implements ProjectComponent, Configurable, Pers
 		return COMPONENT_NAME;
 	}
 
+	@Override
 	public void initComponent() {
 	}
 
+	@Override
 	public void disposeComponent() {
 	}
 
+	@Override
 	public String getDisplayName() {
 		return "TranslateMe";
 	}
@@ -86,10 +66,12 @@ public final class Configuration implements ProjectComponent, Configurable, Pers
 		return null;
 	}
 
+	@Override
 	public String getHelpTopic() {
 		return null;
 	}
 
+	@Override
 	public JComponent createComponent() {
 		if (form == null) {
 			form = new TranslationConfigurationForm();
@@ -103,34 +85,29 @@ public final class Configuration implements ProjectComponent, Configurable, Pers
 	 *
 	 * @throws ConfigurationException
 	 */
+	@Override
 	public void apply() throws ConfigurationException {
 		if (form != null) {
-			form.save(this);
+			form.save(ConfigurationState.getInstance());
 		}
 	}
 
 	/**
 	 * Restores form values from configuration.
 	 */
+	@Override
 	public void reset() {
 		if (form != null) {
-			form.load(this);
+			form.load(ConfigurationState.getInstance());
 		}
 	}
 
 	/**
 	 * Disposes UI resource.
 	 */
+	@Override
 	public void disposeUIResources() {
 		form = null;
-	}
-
-	public Configuration getState() {
-		return this;
-	}
-
-	public void loadState(Configuration state) {
-		XmlSerializerUtil.copyBean(state, this);
 	}
 
 }
