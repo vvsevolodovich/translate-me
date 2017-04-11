@@ -121,16 +121,16 @@ public class TranslationConfigurationForm {
 	}
 
 	public boolean isModified(ConfigurationState data) {
-		Object selectedItem = comboBoxFrom.getSelectedItem();
+		Object selectedFrom = comboBoxFrom.getSelectedItem();
+		Object selectedTo = comboBoxTo.getSelectedItem();
 
-		return selectedItem != null && !selectedItem.equals(data.getFrom());
+		boolean autoChecked = autoDetect.getState();
+
+		final boolean fromChanged = selectedFrom != null && !selectedFrom.equals(data.getFrom());
+		final boolean toChanged = selectedTo != null && !selectedTo.equals(data.getTo());
+		final boolean detectChanged = autoChecked != data.isAutoDetect();
+
+		return fromChanged || toChanged || detectChanged;
 	}
-	/*public boolean isModified(TranslateConfiguration data) {
-		KeyValuePair selectedItem = (KeyValuePair) comboBox.getSelectedItem();
-
-		return selectedItem != null ?
-				!selectedItem.getKey().equals(data.getLangPair()) :
-				data.getLangPair() != null;
-	}*/
 
 }
