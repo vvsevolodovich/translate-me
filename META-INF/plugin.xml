@@ -1,7 +1,7 @@
-<idea-plugin version="2">
+<idea-plugin>
     <id>com.lid.intellij.translateme</id>
     <name>TranslateMe</name>
-    <version>1.0.0.4</version>
+    <version>1.0.0.5</version>
     <vendor email="vladimir.vs.ivanov@gmail.com" url="https://github.com/vlivanov">vlivanov's GitHub</vendor>
 
     <description><![CDATA[
@@ -14,6 +14,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+            1.0.0.5 Fix saving settings; add 2017.1 compatibility<br>
             1.0.0.4 Restore settings<br>
             1.0.0.3 Support in-place translation.<br>
             1.0.0.2 Support language auto-detection.<br>
