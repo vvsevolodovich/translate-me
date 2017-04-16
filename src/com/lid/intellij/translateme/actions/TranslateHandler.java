@@ -10,9 +10,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-/**
- * Created by v.ivanov on 24.12.16.
- */
 class TranslateHandler extends EditorWriteActionHandler {
 
 	private final ActionHandler mHandler;
