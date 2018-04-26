@@ -36,7 +36,8 @@ public class YandexClient {
 	public String detect(String text) {
 		final String method = "detect";
 		String uri = "https://" + HOST + PATH + method;
-		uri += "?key=" + APIKEY;
+		uri += "?hint=" + langFrom + "," + langTo;
+		uri += "&key=" + APIKEY;
 		uri += "&text=" + text;
 
 		return request(uri);
