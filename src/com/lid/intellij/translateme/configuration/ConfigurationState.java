@@ -1,33 +1,27 @@
 package com.lid.intellij.translateme.configuration;
 
-
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.project.Project;
-import com.intellij.util.xmlb.XmlSerializerUtil;
-
-@State(
-		name = ConfigurationComponent.COMPONENT_NAME,
-		storages = {@Storage(id = "translate", file = "translateMe.xml")}
-)
-public class ConfigurationState implements PersistentStateComponent<ConfigurationState> {
+public class ConfigurationState {
 
 	private String langFrom = "en";
 	private String langTo = "ru";
 	private boolean autoDetect = false;
 
-	public static ConfigurationState getInstance() {
-		return ServiceManager.getService(ConfigurationState.class);
-	}
-
-	public String getFrom() {
+	public String getLangFrom() {
 		return langFrom;
 	}
 
-	public String getTo() {
+	public String getLangTo() {
 		return langTo;
+	}
+
+	// do not remove; necessary for settings serialization
+	public void setLangFrom(String langFrom) {
+		this.langFrom = langFrom;
+	}
+
+	// do not remove; necessary for settings serialization
+	public void setLangTo(String langTo) {
+		this.langTo = langTo;
 	}
 
 	public boolean isAutoDetect() {
@@ -41,15 +35,5 @@ public class ConfigurationState implements PersistentStateComponent<Configuratio
 	public void setLangPair(final String from, final String to) {
 		langFrom = from;
 		langTo = to;
-	}
-
-	@Override
-	public ConfigurationState getState() {
-		return this;
-	}
-
-	@Override
-	public void loadState(ConfigurationState state) {
-		XmlSerializerUtil.copyBean(state, this);
 	}
 }

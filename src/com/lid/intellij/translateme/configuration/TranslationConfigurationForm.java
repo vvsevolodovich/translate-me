@@ -83,11 +83,13 @@ public class TranslationConfigurationForm {
 				String responseText = new YandexClient().getLanguages("ru");
 				mLangsResponse = new Gson().fromJson(responseText, LangsResponse.class);
 			} catch (Exception e) {
-				// TODO : failed to get, log
+				System.out.println("TranslationConfigurationForm.createModel: Failed to get languages");
 			}
 		}
 		List<String> items = new ArrayList<>();
-		items.addAll(mLangsResponse.getLangs().keySet());
+		if (mLangsResponse != null && mLangsResponse.getLangs() != null) {
+			items.addAll(mLangsResponse.getLangs().keySet());
+		}
 		return new DefaultComboBoxModel(items.toArray());
 	}
 
@@ -114,8 +116,8 @@ public class TranslationConfigurationForm {
 	}
 
 	public boolean load(ConfigurationState data) {
-		comboBoxFrom.setSelectedItem(data.getFrom());
-		comboBoxTo.setSelectedItem(data.getTo());
+		comboBoxFrom.setSelectedItem(data.getLangFrom());
+		comboBoxTo.setSelectedItem(data.getLangTo());
 		autoDetect.setState(data.isAutoDetect());
 		return true;
 	}
@@ -126,8 +128,8 @@ public class TranslationConfigurationForm {
 
 		boolean autoChecked = autoDetect.getState();
 
-		final boolean fromChanged = selectedFrom != null && !selectedFrom.equals(data.getFrom());
-		final boolean toChanged = selectedTo != null && !selectedTo.equals(data.getTo());
+		final boolean fromChanged = selectedFrom != null && !selectedFrom.equals(data.getLangFrom());
+		final boolean toChanged = selectedTo != null && !selectedTo.equals(data.getLangTo());
 		final boolean detectChanged = autoChecked != data.isAutoDetect();
 
 		return fromChanged || toChanged || detectChanged;

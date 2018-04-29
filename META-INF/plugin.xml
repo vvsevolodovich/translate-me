@@ -14,6 +14,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+            1.0.0.6 Settings are saved across IDE restart<br>
             1.0.0.5 Fix saving settings; add 2017.1 compatibility<br>
             1.0.0.4 Restore settings<br>
             1.0.0.3 Support in-place translation.<br>
@@ -35,11 +36,13 @@
         <applicationConfigurable instance="com.lid.intellij.translateme.configuration.ConfigurationComponent">
 
         </applicationConfigurable>
-        <applicationService serviceImplementation="com.lid.intellij.translateme.configuration.ConfigurationState"/>
     </extensions>
 
     <application-components>
-        <!-- Add your application components here -->
+        <component>
+            <implementation-class>com.lid.intellij.translateme.configuration.PersistingService</implementation-class>
+            <interface-class>com.lid.intellij.translateme.configuration.PersistingService</interface-class>
+        </component>
     </application-components>
 
     <project-components>

@@ -13,6 +13,7 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.ui.awt.RelativePoint;
 import com.lid.intellij.translateme.ResultDialog;
 import com.lid.intellij.translateme.configuration.ConfigurationState;
+import com.lid.intellij.translateme.configuration.PersistingService;
 
 import java.awt.*;
 import java.util.List;
@@ -26,10 +27,10 @@ public class TranslateAction extends EditorAction {
 	public static String[] getLangPair(Project project) {
 
 		if (project != null) {
-			ConfigurationState state = ConfigurationState.getInstance();
+			ConfigurationState state = PersistingService.getInstance(project).getState();
 
-			String from = state.getFrom();
-			String to = state.getTo();
+			String from = state.getLangFrom();
+			String to = state.getLangTo();
 			return new String[]{from, to};
 		}
 
@@ -38,7 +39,7 @@ public class TranslateAction extends EditorAction {
 
 	public static boolean isAutoDetect(Project project) {
 		if (project != null) {
-			ConfigurationState state = ConfigurationState.getInstance();
+			ConfigurationState state = PersistingService.getInstance(project).getState();
 			return state.isAutoDetect();
 		}
 

@@ -20,7 +20,7 @@ public class YandexTranslator implements Translator {
 		String translated;
 		YandexClient yandexClient = new YandexClient();
 		if (autoDetect) {
-			String detect = yandexClient.detect(splittedText);
+			String detect = yandexClient.detect(splittedText, langPairs[0], langPairs[1]);
 			DetectLanguageResponse response = new Gson().fromJson(detect, DetectLanguageResponse.class);
 			int code = response.getCode();
 			if (code == 200) {

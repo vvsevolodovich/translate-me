@@ -33,7 +33,7 @@ public class YandexClient {
 		return request(uri);
 	}
 
-	public String detect(String text) {
+	public String detect(String text, String langFrom, String langTo) {
 		final String method = "detect";
 		String uri = "https://" + HOST + PATH + method;
 		uri += "?hint=" + langFrom + "," + langTo;
