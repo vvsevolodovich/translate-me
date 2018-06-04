@@ -21,6 +21,7 @@ public class TranslationConfigurationForm {
 
 	private LangsResponse mLangsResponse;
 	private final Checkbox autoDetect;
+	private final Checkbox translationTooltip;
 
 	public TranslationConfigurationForm() {
 		rootComponent = new JPanel();
@@ -43,9 +44,17 @@ public class TranslationConfigurationForm {
 		c2.gridx= 0;
 		c2.gridy = 1;
 		autoDetect = new Checkbox("Auto-detect");
-
 		initCheckbox(autoDetect);
 		rootComponent.add(autoDetect, c2);
+
+		GridBagConstraints c3 = new GridBagConstraints();
+		c.anchor = GridBagConstraints.EAST;
+		c3.fill = GridBagConstraints.EAST;
+		c3.gridx= 0;
+		c3.gridy = 2;
+		translationTooltip = new Checkbox("Use tooltip to display translations");
+		rootComponent.add(translationTooltip, c3);
+
 	}
 
 	@NotNull
@@ -112,6 +121,7 @@ public class TranslationConfigurationForm {
 		}
 
 		data.setAutoDetect(autoDetect.getState());
+		data.setTranslationTooltip(translationTooltip.getState());
 		return;
 	}
 
@@ -119,6 +129,7 @@ public class TranslationConfigurationForm {
 		comboBoxFrom.setSelectedItem(data.getLangFrom());
 		comboBoxTo.setSelectedItem(data.getLangTo());
 		autoDetect.setState(data.isAutoDetect());
+		translationTooltip.setState(data.isTranslationTooltip());
 		return true;
 	}
 
@@ -131,8 +142,9 @@ public class TranslationConfigurationForm {
 		final boolean fromChanged = selectedFrom != null && !selectedFrom.equals(data.getLangFrom());
 		final boolean toChanged = selectedTo != null && !selectedTo.equals(data.getLangTo());
 		final boolean detectChanged = autoChecked != data.isAutoDetect();
+		final boolean balloonChanged = translationTooltip.getState() != data.isTranslationTooltip();
 
-		return fromChanged || toChanged || detectChanged;
+		return fromChanged || toChanged || detectChanged || balloonChanged;
 	}
 
 }

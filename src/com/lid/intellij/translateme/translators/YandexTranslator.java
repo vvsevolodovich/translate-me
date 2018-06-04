@@ -22,8 +22,7 @@ public class YandexTranslator implements Translator {
 		if (autoDetect) {
 			String detect = yandexClient.detect(splittedText, langPairs[0], langPairs[1]);
 			DetectLanguageResponse response = new Gson().fromJson(detect, DetectLanguageResponse.class);
-			int code = response.getCode();
-			if (code == 200) {
+			if (response != null && response.getCode() == 200) {
 				String language = response.getLang();
 				translated = yandexClient.translate(splittedText, language, langPairs[1]);
 			} else {

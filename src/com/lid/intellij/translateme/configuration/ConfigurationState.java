@@ -5,6 +5,7 @@ public class ConfigurationState {
 	private String langFrom = "en";
 	private String langTo = "ru";
 	private boolean autoDetect = false;
+	private boolean translationTooltip = false;
 
 	public String getLangFrom() {
 		return langFrom;
@@ -35,5 +36,13 @@ public class ConfigurationState {
 	public void setLangPair(final String from, final String to) {
 		langFrom = from;
 		langTo = to;
+	}
+
+	public boolean isTranslationTooltip() {
+		return translationTooltip;
+	}
+
+	public void setTranslationTooltip(final boolean translationTooltip) {
+		this.translationTooltip = translationTooltip;
 	}
 }

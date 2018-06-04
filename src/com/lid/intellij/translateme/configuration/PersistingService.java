@@ -12,11 +12,10 @@ import org.jetbrains.annotations.Nullable;
 	storages = @Storage("translateMe.xml")
 )
 public class PersistingService implements PersistentStateComponent<ConfigurationState> {
-
 	private ConfigurationState state;
 
-	public static PersistingService getInstance(Project project) 	{
-		return ServiceManager.getService(project, PersistingService.class);
+	public static PersistingService getInstance() 	{
+		return ServiceManager.getService(PersistingService.class);
 	}
 
 	@Nullable
