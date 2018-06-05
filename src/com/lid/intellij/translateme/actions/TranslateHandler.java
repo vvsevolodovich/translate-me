@@ -31,8 +31,8 @@ class TranslateHandler extends EditorWriteActionHandler {
 			String splittedText = splitCamelCase(selectedText);
 			splittedText = splitUnderscore(splittedText);
 
-			String[] langPairs = TranslateAction.getLangPair(project);
-			boolean autoDetect = TranslateAction.isAutoDetect(project);
+			String[] langPairs = TranslateAction.getLangPair();
+			boolean autoDetect = TranslateAction.isAutoDetect();
 			List<String> translated = new YandexTranslator().translate(splittedText, langPairs, autoDetect);
 			if (translated != null) {
 				mHandler.handleResult(editor, translated);
