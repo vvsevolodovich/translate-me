@@ -22,6 +22,8 @@ public class TranslationConfigurationForm {
 	private LangsResponse mLangsResponse;
 	private final Checkbox autoDetect;
 	private final Checkbox translationTooltip;
+	private final Checkbox splitCamelCase;
+	private final Checkbox splitUnderscores;
 
 	public TranslationConfigurationForm() {
 		rootComponent = new JPanel();
@@ -55,6 +57,21 @@ public class TranslationConfigurationForm {
 		translationTooltip = new Checkbox("Use tooltip to display translations");
 		rootComponent.add(translationTooltip, c3);
 
+		GridBagConstraints c5 = new GridBagConstraints();
+		c.anchor = GridBagConstraints.EAST;
+		c5.fill = GridBagConstraints.EAST;
+		c5.gridx= 0;
+		c5.gridy = 3;
+		splitUnderscores = new Checkbox("Split words on underscores");
+
+		rootComponent.add(splitUnderscores, c5);
+		GridBagConstraints c4 = new GridBagConstraints();
+		c.anchor = GridBagConstraints.EAST;
+		c4.fill = GridBagConstraints.EAST;
+		c4.gridx= 0;
+		c4.gridy = 4;
+		splitCamelCase = new Checkbox("Split camel case words");
+		rootComponent.add(splitCamelCase, c4);
 	}
 
 	@NotNull
@@ -122,6 +139,8 @@ public class TranslationConfigurationForm {
 
 		data.setAutoDetect(autoDetect.getState());
 		data.setTranslationTooltip(translationTooltip.getState());
+		data.setSplitCamelCase(splitCamelCase.getState());
+		data.setSplitUnderscores(splitUnderscores.getState());
 		return;
 	}
 
@@ -130,6 +149,8 @@ public class TranslationConfigurationForm {
 		comboBoxTo.setSelectedItem(data.getLangTo());
 		autoDetect.setState(data.isAutoDetect());
 		translationTooltip.setState(data.isTranslationTooltip());
+		splitCamelCase.setState(data.isSplitCamelCase());
+		splitUnderscores.setState(data.isSplitUnderscores());
 		return true;
 	}
 
@@ -143,8 +164,10 @@ public class TranslationConfigurationForm {
 		final boolean toChanged = selectedTo != null && !selectedTo.equals(data.getLangTo());
 		final boolean detectChanged = autoChecked != data.isAutoDetect();
 		final boolean balloonChanged = translationTooltip.getState() != data.isTranslationTooltip();
+		final boolean camelCaseChanged = splitCamelCase.getState() != data.isSplitCamelCase();
+		final boolean splitUnderscoresChanged = splitUnderscores.getState() != data.isSplitUnderscores();
 
-		return fromChanged || toChanged || detectChanged || balloonChanged;
+		return fromChanged || toChanged || detectChanged || balloonChanged || camelCaseChanged || splitUnderscoresChanged;
 	}
 
 }

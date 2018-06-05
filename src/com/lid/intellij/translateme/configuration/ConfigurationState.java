@@ -6,6 +6,8 @@ public class ConfigurationState {
 	private String langTo = "ru";
 	private boolean autoDetect = false;
 	private boolean translationTooltip = false;
+	private boolean splitCamelCase = false;
+	private boolean splitUnderscores = false;
 
 	public String getLangFrom() {
 		return langFrom;
@@ -44,5 +46,21 @@ public class ConfigurationState {
 
 	public void setTranslationTooltip(final boolean translationTooltip) {
 		this.translationTooltip = translationTooltip;
+	}
+
+	public boolean isSplitCamelCase() {
+		return splitCamelCase;
+	}
+
+	public void setSplitCamelCase(final boolean splitCamelCase) {
+		this.splitCamelCase = splitCamelCase;
+	}
+
+	public boolean isSplitUnderscores() {
+		return splitUnderscores;
+	}
+
+	public void setSplitUnderscores(final boolean splitUnderscores) {
+		this.splitUnderscores = splitUnderscores;
 	}
 }
