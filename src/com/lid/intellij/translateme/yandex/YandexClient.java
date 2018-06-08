@@ -8,7 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.List;
 
 public class YandexClient {
 
@@ -36,9 +35,13 @@ public class YandexClient {
 	public String detect(String text, String langFrom, String langTo) {
 		final String method = "detect";
 		String uri = "https://" + HOST + PATH + method;
-		uri += "?hint=" + langFrom + "," + langTo;
-		uri += "&key=" + APIKEY;
-		uri += "&text=" + text;
+		uri += "?key=" + APIKEY;
+		//uri += "&hint=" + langFrom;// + "," + langTo; // works better without hints especially when strings are short
+		try {
+			uri += "&text=" +  URLEncoder.encode(text, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
 		return request(uri);
 	}
