@@ -3,8 +3,8 @@ package com.lid.intellij.translateme.actions;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
-import com.intellij.openapi.project.Project;
 import com.lid.intellij.translateme.configuration.ConfigurationState;
 import com.lid.intellij.translateme.configuration.PersistingService;
 import com.lid.intellij.translateme.translators.YandexTranslator;
@@ -26,10 +26,15 @@ class TranslateHandler extends EditorWriteActionHandler {
 			return;
 		}
 
-		Project project = editor.getProject();
 		ConfigurationState state = PersistingService.getInstance().getState();
 
-		String selectedText = editor.getSelectionModel().getSelectedText();
+		SelectionModel selectionModel = editor.getSelectionModel();
+		if (!selectionModel.hasSelection()) {
+			selectionModel.selectWordAtCaret(true);
+		}
+
+		String selectedText = selectionModel.getSelectedText();
+
 		if (selectedText != null && selectedText.length() > 0) {
 			String splittedText = state.isSplitCamelCase() ? splitCamelCase(selectedText) : selectedText;
 			splittedText = state.isSplitUnderscores() ? splitUnderscore(splittedText) : splittedText;
