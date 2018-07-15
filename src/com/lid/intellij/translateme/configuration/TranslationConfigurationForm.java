@@ -28,11 +28,18 @@ public class TranslationConfigurationForm {
 	public TranslationConfigurationForm() {
 		rootComponent = new JPanel();
 		rootComponent.setPreferredSize(new Dimension(200,200));
-		//rootComponent.setBackground(Color.blue);
 		rootComponent.setLayout(new GridBagLayout());
+		rootComponent.setLocation(0, 0);
+
+		GridBagConstraints keyConstraints = new GridBagConstraints();
+		JTextField keyInput = new JTextField();
+		keyConstraints.anchor = GridBagConstraints.WEST;
+		keyConstraints.fill = GridBagConstraints.WEST;
+		keyConstraints.gridx = 0;
+		keyConstraints.gridy = 0;
+		rootComponent.add(keyInput, keyConstraints);
 
 		GridBagConstraints c = new GridBagConstraints();
-
 		JPanel languages = createLanguages();
 		c.anchor = GridBagConstraints.EAST;
 		c.fill = GridBagConstraints.EAST;

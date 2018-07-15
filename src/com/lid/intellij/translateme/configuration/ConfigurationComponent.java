@@ -1,25 +1,11 @@
 package com.lid.intellij.translateme.configuration;
 
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public final class ConfigurationComponent implements Configurable {
-	public static final String COMPONENT_NAME = "Translate.ConfigurationComponent";
-//  private final ImageIcon CONFIG_ICON =
-//          helper.getIcon("resources/icon.png", getClass());
-
-	//public static final String CONFIGURATION_LOCATION;
-	//+"/.IntelliJIdea70/config/inspection";
-
-	//static {
-	//	CONFIGURATION_LOCATION = System.getProperty("user.home");
-	//	//+"/.IntelliJIdea70/config/inspection";
-	//}
 
 	private TranslationConfigurationForm form;
 	private PersistingService instance;
@@ -34,19 +20,9 @@ public final class ConfigurationComponent implements Configurable {
 		return instance.getState();
 	}
 
-	@NotNull
-	public String getComponentName() {
-		return COMPONENT_NAME;
-	}
-
 	@Override
 	public String getDisplayName() {
 		return "TranslateMe";
-	}
-
-	public Icon getIcon() {
-//    return CONFIG_ICON;
-		return null;
 	}
 
 	@Override
@@ -68,11 +44,9 @@ public final class ConfigurationComponent implements Configurable {
 
 	/**
 	 * Stores settings from form to configuration bean.
-	 *
-	 * @throws ConfigurationException
 	 */
 	@Override
-	public void apply() throws ConfigurationException {
+	public void apply() {
 		if (form != null) {
 			form.save(getState());
 		}

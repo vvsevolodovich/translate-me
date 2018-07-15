@@ -66,17 +66,17 @@ public class TranslateAction extends EditorAction {
         public void handleError(Editor editor) {
             Application app = ApplicationManager.getApplication();
             app.invokeLater(() -> {
-                showErrorBalloon(editor, "Failed to translate");
+                showErrorBalloon("Failed to translate");
             });
         }
 
-        private void showErrorBalloon(Editor editor, String message) {
+        private void showErrorBalloon(String message) {
             NOTIFICATION_GROUP.createNotification("TranslateMe Error", XmlStringUtil.wrapInHtml(message), NotificationType.ERROR, (notification, event) -> {
             }).notify(null);
         }
 
         private void showTooltip(Editor editor, String message) {
-            Tooltip.showTooltip(message, editor);
+            Tooltip.INSTANCE.showTooltip(message, editor);
         }
     }
 }
